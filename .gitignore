@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+**/bin/
+**/obj/
+.vs/
+work/
+
+# Documentación local fuera del repositorio
+AGENTS.md
+README.md
+[Dd][Oo][Cc][Ss]/

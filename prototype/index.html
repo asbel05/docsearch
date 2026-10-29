@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biblioteca · DocSearch</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <script src="scripts/navigation.js" defer></script>
+  <script src="scripts/library.js" defer></script>
+  <script src="scripts/query.js" defer></script>
+</head>
+<body>
+  <div class="workspace">
+    <aside class="sidebar">
+      <a class="brand" href="#biblioteca">DocSearch</a>
+      <p class="nav-label">MI ESPACIO</p>
+      <nav aria-label="Navegación principal">
+        <a href="#biblioteca" aria-current="page">Biblioteca</a>
+        <a href="#consulta">Consulta</a>
+        <a href="#historial">Historial</a>
+      </nav>
+    </aside>
+
+    <div class="workspace-content">
+      <header class="topbar">
+        <p>Mi espacio <span aria-hidden="true">/</span> <strong data-page-name>Biblioteca</strong></p>
+      </header>
+      <main>
+        <section id="biblioteca" data-view aria-labelledby="library-title">
+          <div class="page-heading"><h1 id="library-title" tabindex="-1">Biblioteca</h1><p>Organiza los documentos que usarás como fuente para tus preguntas.</p></div>
+          <div class="two-columns">
+            <section class="panel" aria-labelledby="documents-title">
+              <div class="panel-heading"><h2 id="documents-title">Tus documentos</h2></div>
+              <fieldset class="document-list">
+                <legend class="sr-only">Documentos incluidos en la consulta</legend>
+                <label class="document-row">
+                  <input type="checkbox" data-document="Acceso a cuentas.txt" checked>
+                  <span class="file-type" aria-hidden="true">TXT</span>
+                  <span class="document-info"><strong>Acceso a cuentas.txt</strong><small>Procedimiento de recuperación de acceso</small></span>
+                </label>
+                <label class="document-row">
+                  <input type="checkbox" data-document="Solicitud de soporte.txt" checked>
+                  <span class="file-type" aria-hidden="true">TXT</span>
+                  <span class="document-info"><strong>Solicitud de soporte.txt</strong><small>Información para crear un ticket</small></span>
+                </label>
+              </fieldset>
+              <div class="panel-footer"><span><strong id="selection-count">2</strong> seleccionados</span><a class="button primary" href="#consulta">Consultar selección</a></div>
+            </section>
+            <aside class="panel panel-body" aria-labelledby="upload-title">
+              <h2 id="upload-title">Añadir documentos</h2>
+              <p class="muted">Selecciona archivos de texto de tu equipo.</p>
+              <form id="upload-form">
+                <label for="files">Archivos .txt</label>
+                <input id="files" type="file" accept=".txt,text/plain" multiple required>
+                <p class="help">Puedes seleccionar varios archivos de texto.</p>
+                <button class="primary" type="submit">Añadir documentos</button>
+                <p class="status" id="upload-status" role="status"></p>
+              </form>
+            </aside>
+          </div>
+          <p class="page-note">Marca los documentos que quieres incluir antes de hacer una consulta.</p>
+        </section>
+
+        <section id="consulta" data-view aria-labelledby="query-title" hidden>
+          <div class="page-heading"><h1 id="query-title" tabindex="-1">Consulta</h1><p>Pregunta sobre tus documentos y comprueba las fuentes de cada respuesta.</p></div>
+          <div class="two-columns">
+            <div class="stack">
+              <section class="panel panel-body" aria-labelledby="question-title">
+                <h2 id="question-title">Haz una pregunta</h2>
+                <form id="question-form">
+                  <label for="question">¿Qué quieres saber?</label>
+                  <textarea id="question" name="question" rows="4" maxlength="1000" required placeholder="¿Cómo recupero el acceso a mi cuenta?"></textarea>
+                  <div class="actions"><button class="primary" id="ask-button" type="submit">Consultar</button><button id="show-example" type="button">Ver respuesta</button></div>
+                  <p class="status" id="question-status" role="status"></p>
+                </form>
+              </section>
+              <section class="panel panel-body" aria-labelledby="answer-title">
+                <h2 id="answer-title">Respuesta</h2>
+                <p class="empty-state" id="answer-empty">La respuesta y sus fuentes aparecerán aquí.</p>
+                <div id="answer-example" hidden>
+                  <p id="answer-text"></p>
+                  <h3>Fuentes consultadas</h3>
+                  <details open><summary id="source-name"></summary><blockquote id="source-text"></blockquote></details>
+                </div>
+              </section>
+            </div>
+            <aside class="panel panel-body" aria-labelledby="scope-title">
+              <h2 id="scope-title">Contexto de la consulta</h2>
+              <p class="muted">Documentos seleccionados en la biblioteca:</p>
+              <ul class="context-list" id="selected-documents"></ul>
+              <p class="help" id="selection-empty" hidden>Selecciona al menos un documento para consultar.</p>
+              <a href="#biblioteca">Cambiar selección</a>
+            </aside>
+          </div>
+        </section>
+
+        <section id="historial" data-view aria-labelledby="history-title" hidden>
+          <div class="page-heading heading-with-action"><div><h1 id="history-title" tabindex="-1">Historial</h1><p>Vuelve a tus preguntas y revisa las respuestas con sus fuentes.</p></div><a class="button primary" href="#consulta">Nueva consulta</a></div>
+          <section class="panel" aria-labelledby="past-queries-title">
+            <div class="panel-heading"><h2 id="past-queries-title">Consultas anteriores</h2></div>
+            <div class="history-list">
+              <article class="history-row"><div><h3>¿Cómo recupero el acceso a mi cuenta?</h3><p class="muted">Acceso a cuentas.txt · 1 fuente</p></div><a class="button" href="#consulta" data-example="access">Ver consulta</a></article>
+              <article class="history-row"><div><h3>¿Qué información debe llevar un ticket?</h3><p class="muted">Solicitud de soporte.txt · 1 fuente</p></div><a class="button" href="#consulta" data-example="support">Ver consulta</a></article>
+            </div>
+          </section>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </div>
+</body>
+</html>
